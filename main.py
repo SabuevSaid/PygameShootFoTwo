@@ -15,6 +15,7 @@ player = Player(player_x, player_y, (pygame.K_UP, pygame.K_RIGHT, pygame.K_LEFT)
 while play:
     keys = pygame.key.get_pressed()
     pygame.display.update()
+    window.blit(bg, (0, 0))
     for obj in objects:
         obj.update()
     for obj in objects:

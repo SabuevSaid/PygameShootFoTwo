@@ -15,6 +15,7 @@ def output_on_display(s):
      window.blit(text.render(f'{s}', False, (255, 255, 255)), (100, tile * 18))
 player_texture = pygame.image.load('items/mario2.png')
 window = pygame.display.set_mode((tile * 40, tile * 20))
+bg = pygame.image.load('items/nebo.png')
 play = True
 player_x = tile * 20
 player_y = tile * 10
