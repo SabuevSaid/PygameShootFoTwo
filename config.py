@@ -28,9 +28,13 @@ turns = {'left': [
 ], 'up': [
      pygame.image.load('items/mario_right_jump.png'),
      pygame.image.load('items/mario_left_jump.png')
+], 'down': [
+     pygame.image.load('items/mario_right2.png'),
+     pygame.image.load('items/mario_left2.png')
 ]}
 play = True
 player_x = tile * 20
 player_y = tile * 10
 objects = []
 subjects = []
+shots = []

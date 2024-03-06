@@ -24,6 +24,10 @@ while play:
         sub.update(keys)
     for sub in subjects:
         sub.draw()
+    for sh in shots:
+        sh.update()
+    for sh in shots:
+        sh.draw()
     fps.tick(15)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
