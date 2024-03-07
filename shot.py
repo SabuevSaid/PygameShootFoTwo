@@ -26,4 +26,4 @@ class Shot:
                 if self in shots:
                   shots.remove(self)
     def draw(self):
-        pygame.draw.circle(window, 'Red', (self.w, self.h), 5)
+        pygame.draw.circle(window, 'Red', (self.w, self.h), 2)

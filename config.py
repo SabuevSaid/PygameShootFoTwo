@@ -25,10 +25,13 @@ turns = {'left': [
      pygame.image.load('items/mario_right3.png'),
      pygame.image.load('items/mario_right4.png'),
      pygame.image.load('items/mario_right5.png'),
-], 'up': [
+], 'jump': [
      pygame.image.load('items/mario_right_jump.png'),
      pygame.image.load('items/mario_left_jump.png')
 ], 'down': [
+     pygame.image.load('items/mario_right2.png'),
+     pygame.image.load('items/mario_left2.png'),
+], 'up': [
      pygame.image.load('items/mario_right2.png'),
      pygame.image.load('items/mario_left2.png')
 ]}

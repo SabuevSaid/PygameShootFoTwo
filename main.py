@@ -11,7 +11,7 @@ for h in range(20):
             Block(h * tile, w * tile, 'zemla')
         if maps.maps[0][h][w] == '+':
             Block(h * tile, w * tile, 'trava')
-player = Player(player_x, player_y, (pygame.K_UP, pygame.K_RIGHT, pygame.K_LEFT))
+player = Player(player_x, player_y, (pygame.K_UP, pygame.K_RIGHT, pygame.K_LEFT, pygame.K_DOWN, pygame.K_SPACE, pygame.K_KP0))
 while play:
     keys = pygame.key.get_pressed()
     pygame.display.update()
