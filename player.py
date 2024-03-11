@@ -8,7 +8,7 @@ class Player:
     def __init__(self, w, h, keyList):
         self.w, self.h = w, h
         self.direct = 'right'
-        self.jump_size = 16
+        self.jump_size = 20
         self.graviti = True
         self.anim = 0
         self.subjects = config.subjects
@@ -23,7 +23,7 @@ class Player:
         self.down = keyList[3]
         self.jump = keyList[4]
         self.shoot = keyList[5]
-        self.rect = pygame.Rect(self.w, self.h, config.tile, config.tile)
+        self.rect = pygame.Rect(self.w, self.h, config.tile / 2, config.tile / 2)
         config.subjects.append(self)
     def upn(self):
         if self.direct == 'right':
@@ -39,25 +39,15 @@ class Player:
         if self.is_jump:
             self.direct = 'jump'
             if self.jump_size > 0:
-                self.graviti = False
+                self.jump_size -= 1
+                self.h -= self.jump_size
             else:
-                self.jump_size = 16
+                self.jump_size = 20
                 self.graviti = True
                 self.is_jump = False
-            self.jump_size -= 1
     def gravitin(self):
-        if not any([pygame.Rect(self.w, self.h + self.graviti_size, config.tile, config.tile).colliderect(obj.rect) for obj in config.objects]):
-            self.on_earth = False
-            if self.graviti:
-                self.h += self.graviti_size
-                self.graviti_size += 1
-        else:
-            self.on_earth = True
-            self.is_jump = False
-            self.graviti_size = 1
-        if not self.graviti:
-            if not any([pygame.Rect(self.w, self.h - self.jump_size, config.tile, config.tile).colliderect(obj.rect) for obj in config.objects]):
-                self.h -= self.jump_size
+        self.h += self.graviti_size
+        self.graviti_size += 1
     def leftn(self):
         if not any([pygame.Rect(self.w - 7, self.h, config.tile, config.tile).colliderect(obj.rect) for obj in config.objects]):
             self.w -= 5
@@ -92,6 +82,15 @@ class Player:
             elif self.direct == 'down':
                 shot.Shot(self.w + config.tile / 2, self.h + config.tile, 'down')
     def update(self, keys):
+        if not any([pygame.Rect(self.w, self.h + self.graviti_size, config.tile, config.tile).colliderect(obj.rect) for obj in config.objects]):
+            self.gravitin()
+            self.on_earth = False
+        else:
+            self.graviti_size = 1
+            self.on_earth = True
+        if not self.graviti:
+            if not any([pygame.Rect(self.w, self.h - self.jump_size, config.tile, config.tile).colliderect(obj.rect) for obj in config.objects]):
+                self.h -= self.jump_size
         self.anim = 0
         if keys[self.left]:
             self.leftn()
@@ -101,11 +100,10 @@ class Player:
             self.downn()
         elif keys[self.up]:
             self.upn()
-        elif keys[self.jump]:
+        if keys[self.jump] or self.is_jump:
             self.jumpn()
         if keys[self.shoot]:
             self.shotn()
-        self.gravitin()
     def draw(self):
         self.texture = config.turns[self.direct][self.anim]
         config.draw(self)
